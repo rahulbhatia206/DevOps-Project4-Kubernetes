@@ -3,6 +3,7 @@
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
 version: 2
+
 jobs:
   build:
     docker:
@@ -10,8 +11,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-
-working_directory: ~/repo
 
   # Download and cache dependencies
       - restore_cache:
@@ -31,9 +30,9 @@ working_directory: ~/repo
             chmod +x /bin/hadolint
 
       - save_cache:
-        paths:
+          paths:
           - ./venv
-        key: v1-dependencies-{{ checksum "requirements.txt" }}
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
 
       # run lint!
       - run:
